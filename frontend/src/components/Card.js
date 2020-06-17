@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 
-const Card = ({ color, value, validateCard }) => {
-  const card = {
-    color: color,
-    value: value,
-  };
-
+const Card = ({ card, validateCard }) => {
   return (
     <div>
       <button onClick={() => validateCard(card)}>
-        {color}
-        {value}
+        {card.color}
+        {card.value}
       </button>
     </div>
   );

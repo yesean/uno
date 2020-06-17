@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Opponent from './Opponent';
-import Hand from './Hand'
+import Hand from './Hand';
 
 const Player = (props) => {
   const cards = props.cards;
@@ -11,7 +11,7 @@ const Player = (props) => {
   const myTurn = id == currTurn;
 
   const validateCard = (card) => {
-    return card.value === cardOnTop.value || card.color === cardOnTop.color;
+    return card.color === cardOnTop.color || card.value === cardOnTop.value;
   };
 
   return (
