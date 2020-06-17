@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Deck = (props) => {
   let cards = props.cards;
 
-  return <div>cards</div>;
+  return <div>Cards in Deck: {cards}</div>;
 };
 
 export default Deck;

@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
-import Opponent from './Opponent';
+import React from 'react';
 import Hand from './Hand';
 
 const Player = (props) => {
-  const cards = props.cards;
-  const playersHands = props.playersHands;
+  const player = props.player;
   const cardOnTop = props.cardOnTop;
-  const id = props.id;
   const currTurn = props.currTurn;
-  const myTurn = id == currTurn;
+  const myTurn = player.id === currTurn;
 
   const validateCard = (card) => {
-    return card.color === cardOnTop.color || card.value === cardOnTop.value;
+    if (card.color === cardOnTop.color || card.value === cardOnTop.value) {
+      props.playCard(card);
+    } else {
+      alert(`Play a valid card.`)
+    }
   };
 
   return (
     <div>
-      {playersHands.map((p) => (
-        <Opponent id={p.id} cards={p.cards} />
-      ))}
-      <Hand cards={cards} validateCard={validateCard} />
+      <Hand cards={player.cards} validateCard={validateCard} />
     </div>
   );
 };

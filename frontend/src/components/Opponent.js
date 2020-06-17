@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Opponent = (props) => {
-  const id = props.id;
-  const cards = props.cards;
-
+const Opponent = ({ opponent }) => {
   return (
     <div>
-      {id}
-      {cards}
+      <p>Op: {opponent.id}</p>
+      <p>Cards: {opponent.cards}</p>
     </div>
   );
 };
