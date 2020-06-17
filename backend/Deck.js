@@ -3,8 +3,8 @@ class Deck {
     const deck = [];
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 10; j++) {
-        deck.push({ color: i, number: j });
-        deck.push({ color: i, number: j });
+        deck.push({ color: i, value: j });
+        deck.push({ color: i, value: j });
       }
     }
     this.shuffle(deck);
