@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import './../App.css'
 
 const Hand = ({ cards, validateCard }) => {
   return (
@@ -12,7 +13,7 @@ const Hand = ({ cards, validateCard }) => {
       <tbody>
         <tr>
           {cards.map((c) => (
-            <td key={`${c.color}${c.value}`}>
+            <td key={`${c.color}${c.value}`} className='playerCard'>
               <Card
                 card={c}
                 validateCard={validateCard}

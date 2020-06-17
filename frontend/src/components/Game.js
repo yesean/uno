@@ -2,6 +2,7 @@ import React, { useState, cloneElement } from 'react';
 import Player from './Player';
 import Deck from './Deck';
 import Opponent from './Opponent';
+import './../App.css'
 
 const createCard = (color, value) => {
   return {
@@ -9,8 +10,6 @@ const createCard = (color, value) => {
     value: value,
   };
 };
-
-const cardOnTop = createCard('y', 1);
 
 const deck = [
   createCard('b', 1),
@@ -55,7 +54,11 @@ const currTurn = 1;
 const Game = ({ numPlayers }) => {
   const [currPlayer, setCurrPlayer] = useState(0);
   const [winner, setWinner] = useState(null);
-  // const []
+  const [cardOnTop, setCardOnTop] = useState(createCard('y', 1))
+  
+  const playCard = (card) => {
+    setCardOnTop(card)
+  }
 
   const nextPlayer = () => {
     setCurrPlayer((currPlayer + 1) % numPlayers);
@@ -71,7 +74,7 @@ const Game = ({ numPlayers }) => {
             <tbody>
               <tr>
                 {opponents.map((o) => (
-                  <td key={o.id}>
+                  <td key={o.id} className='opponent'>
                     <Opponent opponent={o} />
                   </td>
                 ))}
@@ -81,7 +84,7 @@ const Game = ({ numPlayers }) => {
           <Deck cards={deck.length} />
           <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
           <br></br>
-          <Player player={player} cardOnTop={cardOnTop} currTurn={currTurn} />
+          <Player player={player} cardOnTop={cardOnTop} currTurn={currTurn} playCard={playCard}/>
         </center>
       </div>
       //player's deck with navigation buttons

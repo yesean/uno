@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.opponent {
+  border-style: solid;
+  height: 60px;
+  width: 40px;
+  color: red;
+}
+
+.playerCard {
+  border-style: solid;
+  height: 60px;
+  width: 40px;
+  color: green;
+}
+
+#deck {
+  border-style: solid;
+  height: 100px;
+  width: 80px;
+  align-items: center;
+  vertical-align: center;
+}
