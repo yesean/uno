@@ -14,7 +14,7 @@ const currentGame = new Game();
 
 io.on("connection", (socket) => {
   console.log("a user connected");
-  Game.addPlayer('test player');
+//   Game.addPlayer('test player');
 //   socket.on('name input', m => {
 //   })
   socket.on("draw", (m) => {
@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
   })
   socket.on("disconnect", () => {
     console.log("user disconnected");
-    Game.removePlayer();
+    // Game.removePlayer();
   });
 });
 

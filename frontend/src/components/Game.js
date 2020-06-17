@@ -3,6 +3,9 @@ import Player from './Player';
 import Deck from './Deck';
 import Opponent from './Opponent';
 import './../App.css'
+import openSocket from 'socket.io-client'
+const socket = openSocket('http://localhost:3000')
+
 
 const createCard = (color, value) => {
   return {
