@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-const Card = (props) => {
-  const [color, setColor] = setColor(props.color)
-  const [value, setValue] = setValue(props.value)
+const Card = ({ color, value, validateCard }) => {
+  const card = {
+    color: color,
+    value: value,
+  };
 
   return (
     <div>
-      <p>color</p>
-      <p>value</p>
+      <button onClick={() => validateCard(card)}>
+        {color}
+        {value}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
