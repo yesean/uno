@@ -2,7 +2,7 @@ import React, { useState, cloneElement } from 'react';
 import Player from './Player';
 import Deck from './Deck';
 import Opponent from './Opponent';
-import './../App.css'
+import './../App.css';
 
 const createCard = (color, value) => {
   return {
@@ -11,7 +11,7 @@ const createCard = (color, value) => {
   };
 };
 
-const deck = [
+const currDeck = [
   createCard('b', 1),
   createCard('b', 2),
   createCard('b', 3),
@@ -44,7 +44,9 @@ const pcards = [
   createCard('g', 5),
 ];
 
-const player = {
+const pid = '1';
+
+const currPlayer = {
   id: '1',
   cards: pcards,
 };
@@ -52,16 +54,19 @@ const player = {
 const currTurn = 1;
 
 const Game = ({ numPlayers }) => {
-  const [currPlayer, setCurrPlayer] = useState(0);
+  const [cards, setCards] = useState(pcards);
+  const [id, setId] = useState(pid);
   const [winner, setWinner] = useState(null);
-  const [cardOnTop, setCardOnTop] = useState(createCard('y', 1))
-  
-  const playCard = (card) => {
-    setCardOnTop(card)
-  }
+  const [cardOnTop, setCardOnTop] = useState(createCard('y', 1));
+  const [deck, setDeck] = useState(currDeck);
 
-  const nextPlayer = () => {
-    setCurrPlayer((currPlayer + 1) % numPlayers);
+  const draw = () => {
+    setCards(cards.concat(deck.pop()));
+    setDeck(deck);
+  };
+
+  const playCard = (card) => {
+    setCardOnTop(card);
   };
 
   if (!winner) {
@@ -83,8 +88,15 @@ const Game = ({ numPlayers }) => {
           </table>
           <Deck cards={deck.length} />
           <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
-          <br></br>
-          <Player player={player} cardOnTop={cardOnTop} currTurn={currTurn} playCard={playCard}/>
+          <button onClick={() => draw()}>
+              Draw
+          </button>
+          <Player
+            player={{ cards: cards, id: id }}
+            cardOnTop={cardOnTop}
+            currTurn={currTurn}
+            playCard={playCard}
+          />
         </center>
       </div>
       //player's deck with navigation buttons
