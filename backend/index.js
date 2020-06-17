@@ -1,23 +1,20 @@
 const express = require("express");
 const cors = require("cors");
-const game = require("./Game");
+const Game = require("./Game");
 
 const app = express();
 app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 
-let players = [
-  { name: "benis", id: 0 },
-  { name: "bean", id: 1 },
-];
+let players = [{ name: "benis" }, { name: "bean" }];
 
+const currentGame = new Game();
 
 
 const errorHandler = () => {
   return null;
 };
-
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
