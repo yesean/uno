@@ -5,13 +5,14 @@ import Footer from './components/Footer';
 import Game from './components/Game';
 import socketService from './services/socket.js';
 
-socketService.sendName({ name: 'benis is my name' });
+let name = 'benis'
+let id = socketService.sendName({ name });
 
 function App() {
   return (
     <div>
       <Header />
-      <Game />
+      <Game name={name} id={id}/>
       <Footer />
     </div>
   );

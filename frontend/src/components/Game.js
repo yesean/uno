@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './../App.css';
-import socketService from './../services/socket.js';
-import Deck from './Deck';
-import Opponent from './Opponent';
-import Player from './Player';
+import React, { useState } from "react";
+import "./../App.css";
+import socketService from "./../services/socket.js";
+import Deck from "./Deck";
+import Opponent from "./Opponent";
+import Player from "./Player";
 
 const Game = () => {
   // const [id, setId] = useState(null);
@@ -13,16 +13,16 @@ const Game = () => {
   // const [currTurn, setCurrTurn] = useState(null);
   // const [winner, setWinner] = useState(null);
 
-  const[props, setProps] = useState({
+  const [props, setProps] = useState({
     id: null,
-    hand: [], 
-    cardOnTop: [], 
+    hand: [],
+    cardOnTop: [],
     opponents: [],
     currTurn: [],
     winner: [],
-  })
-  
-  const {id, hand, cardOnTop, opponents, currTurn, winner} = props
+  });
+
+  const { id, hand, cardOnTop, opponents, currTurn, winner } = props;
 
   const draw = () => {
     console.log(`calling draw`);
@@ -34,10 +34,10 @@ const Game = () => {
   };
 
   if (id) {
-    socketService.socket.on('fetch', (data) => {
+    socketService.socket.on("fetch", (data) => {
       console.log(`receiving data as player id ${id}`);
       console.log(`player data: ${data.playerData.join()}`);
-      console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
+      console.log("hand: " + data.playerData.find((p) => p.id === id).hand);
       // setWinner(data.winner);
       // console.log(`rendering hand`)
       // setCardOnTop(data.topCard);
@@ -53,50 +53,50 @@ const Game = () => {
         ...props,
         hand: data.playerData.find((p) => p.id === id).hand,
         cardOnTop: data.topCard,
-        opponents:  data.playerData.filter((p) => p.id !== id),
+        opponents: data.playerData.filter((p) => p.id !== id),
         currTurn: data.currPlayer,
-        winner: data.winner
-      })
+        winner: data.winner,
+      });
+      if (!winner) {
+        return (
+          //players in circle
+          //deck in middle/ uno button
+          <div>
+            <center>
+              <table>
+                <tbody>
+                  <tr>
+                    {opponents.map((o) => (
+                      <td key={o.id} className="opponent">
+                        <Opponent opponent={o} />
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
+              <Deck />
+              <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
+              <button onClick={() => draw()}>Draw</button>
+              <Player
+                player={{ hand: hand, id: id }}
+                cardOnTop={cardOnTop}
+                currTurn={currTurn}
+                playCard={playCard}
+              />
+            </center>
+          </div>
+          //player's deck with navigation buttons
+        );
+      } else {
+        return <h1>Game Over Boiz!</h1>;
+      }
     });
   }
 
   socketService.socket.on("giveID", (data) => {
-    setProps({...props, id: data.id});
+    setProps({ ...props, id: data.id });
   });
-
-  if (!winner) {
-    return (
-      //players in circle
-      //deck in middle/ uno button
-      <div>
-        <center>
-          <table>
-            <tbody>
-              <tr>
-                {opponents.map((o) => (
-                  <td key={o.id} className="opponent">
-                    <Opponent opponent={o} />
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-          <Deck />
-          <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
-          <button onClick={() => draw()}>Draw</button>
-          <Player
-            player={{ hand: hand, id: id }}
-            cardOnTop={cardOnTop}
-            currTurn={currTurn}
-            playCard={playCard}
-          />
-        </center>
-      </div>
-      //player's deck with navigation buttons
-    );
-  } else {
-    return <h1>Game Over Boiz!</h1>;
-  }
+  return null;
 };
 
 export default Game;
