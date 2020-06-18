@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './../App.css';
-import socketService from './../services/socket.js';
-import Deck from './Deck';
-import Opponent from './Opponent';
-import Player from './Player';
+import React, { useState, useEffect } from "react";
+import "./../App.css";
+import socketService from "./../services/socket.js";
+import Deck from "./Deck";
+import Opponent from "./Opponent";
+import Player from "./Player";
 
 const Game = () => {
   // const [id, setId] = useState(null);
@@ -13,16 +13,16 @@ const Game = () => {
   // const [currTurn, setCurrTurn] = useState(null);
   // const [winner, setWinner] = useState(null);
 
-  const[props, setProps] = useState({
+  const [props, setProps] = useState({
     id: null,
-    hand: [], 
-    cardOnTop: [], 
+    hand: [],
+    cardOnTop: [],
     opponents: [],
     currTurn: [],
-    winner: [],
-  })
-  
-  const {id, hand, cardOnTop, opponents, currTurn, winner} = props
+    winner: null,
+  });
+
+  const { id, hand, cardOnTop, opponents, currTurn, winner } = props;
 
   const draw = () => {
     console.log(`calling draw`);
@@ -33,36 +33,43 @@ const Game = () => {
     socketService.play({ id: id, card: card });
   };
 
-  if (id) {
-    socketService.socket.on('fetch', (data) => {
-      console.log(`receiving data as player id ${id}`);
-      console.log(`player data: ${data.playerData.join()}`);
-      console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
-      // setWinner(data.winner);
-      // console.log(`rendering hand`)
-      // setCardOnTop(data.topCard);
-      // console.log(`rendering hand`)
-      // setCurrTurn(data.currPlayer);
-      // console.log(`rendering hand`)
-      // setHand(data.playerData.find((p) => p.id === id).hand);
-      // console.log(`rendering hand`)
-      // setOpponents(data.playerData.filter((p) => p.id !== id));
-      // console.log(`rendering hand`)
+  // if (id) {
+  //   socketService.socket.on("fetch", (data) => {
+  //     // console.log(`receiving data as player id ${id}`);
+  //     // console.log(`player data: ${data.playerData.join()}`);
+  //     // console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
+  //     console.log("fetch run");
+  //     setProps({
+  //       ...props,
+  //       hand: data.playerData.find((p) => p.id === id).hand,
+  //       cardOnTop: data.topCard,
+  //       opponents: data.playerData.filter((p) => p.id !== id),
+  //       currTurn: data.currPlayer,
+  //       winner: data.winner,
+  //     });
+  //   });
+  // }
 
-      setProps({
-        ...props,
-        hand: data.playerData.find((p) => p.id === id).hand,
-        cardOnTop: data.topCard,
-        opponents:  data.playerData.filter((p) => p.id !== id),
-        currTurn: data.currPlayer,
-        winner: data.winner
-      })
+  useEffect(() => {
+    socketService.socket.on("giveID", (data) => {
+      setProps({ ...props, id: data.id });
     });
-  }
+  }, []);
 
-  socketService.socket.on("giveID", (data) => {
-    setProps({...props, id: data.id});
-  });
+  useEffect(() => {
+      socketService.socket.on("fetch", (data) => {
+        console.log("fetch run");
+        setProps({
+          ...props,
+          hand: data.playerData.find((p) => p.id === id).hand,
+          cardOnTop: data.topCard,
+          opponents: data.playerData.filter((p) => p.id !== id),
+          currTurn: data.currPlayer,
+          winner: data.winner,
+        });
+      });
+    }
+  }, []);
 
   if (!winner) {
     return (

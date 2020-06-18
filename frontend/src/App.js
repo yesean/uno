@@ -6,13 +6,12 @@ import Game from './components/Game';
 import socketService from './services/socket.js';
 
 let name = 'benis'
-let id = socketService.sendName({ name });
-
+socketService.sendName({ name });
 function App() {
   return (
     <div>
       <Header />
-      <Game name={name} id={id}/>
+      <Game />
       <Footer />
     </div>
   );

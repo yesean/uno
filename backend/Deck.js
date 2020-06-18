@@ -4,7 +4,7 @@ class Deck {
     for (let j = 0; j < 10; j++) {
         deck.push({ color: 'red', value: j });
         deck.push({ color: 'blue', value: j });
-        deck.push({ color: 'yellow', value: j });
+        deck.push({ color: '#EBC815', value: j });
         deck.push({ color: 'green', value: j });
     }
     this.shuffle(deck);
