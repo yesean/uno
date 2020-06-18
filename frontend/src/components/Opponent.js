@@ -12,7 +12,6 @@ const Opponent = ({ opponent }) => {
     alignItems: 'center',
     textAlign: 'center',
   };
-
   return (
     <td key={opponent.id} style={opponentStyle} className='opponent'>
       {opponent.name}
