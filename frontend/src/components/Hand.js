@@ -1,8 +1,11 @@
 import React from 'react';
 import Card from './Card';
-import './../App.css'
+import './../App.css';
 
 const Hand = ({ cards, validateCard }) => {
+  const genID = () => {
+    return Math.random * 1000000;
+  };
   return (
     <table>
       <thead>
@@ -13,12 +16,11 @@ const Hand = ({ cards, validateCard }) => {
       <tbody>
         <tr>
           {cards.map((c) => (
-            <td key={`${c.color}${c.value}`} className='playerCard'>
-              <Card
-                card={c}
-                validateCard={validateCard}
-              />
-            </td>
+            <Card
+              key={cards.indexOf(c)}
+              card={c}
+              validateCard={validateCard}
+            />
           ))}
         </tr>
       </tbody>
