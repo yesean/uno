@@ -6,14 +6,23 @@ import Opponent from './Opponent';
 import Player from './Player';
 
 const Game = () => {
-  const [id, setId] = useState(null);
-  const [hand, setHand] = useState([]);
-  const [cardOnTop, setCardOnTop] = useState([]);
-  const [opponents, setOpponents] = useState([]);
-  const [currTurn, setCurrTurn] = useState(null);
-  const [winner, setWinner] = useState(null);
-  // setId(5)
-  // console.log(id)
+  // const [id, setId] = useState(null);
+  // const [hand, setHand] = useState([]);
+  // const [cardOnTop, setCardOnTop] = useState([]);
+  // const [opponents, setOpponents] = useState([]);
+  // const [currTurn, setCurrTurn] = useState(null);
+  // const [winner, setWinner] = useState(null);
+
+  const[props, setProps] = useState({
+    id: null,
+    hand: [], 
+    cardOnTop: [], 
+    opponents: [],
+    currTurn: [],
+    winner: [],
+  })
+  
+  const {id, hand, cardOnTop, opponents, currTurn, winner} = props
 
   const draw = () => {
     console.log(`calling draw`);
@@ -29,23 +38,30 @@ const Game = () => {
       console.log(`receiving data as player id ${id}`);
       console.log(`player data: ${data.playerData.join()}`);
       console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
-      setWinner(data.winner);
-      console.log(`rendering hand`)
-      setCardOnTop(data.topCard);
-      console.log(`rendering hand`)
-      setCurrTurn(data.currPlayer);
-      console.log(`rendering hand`)
-      setHand(data.playerData.find((p) => p.id === id).hand);
-      console.log(`rendering hand`)
-      setOpponents(data.playerData.filter((p) => p.id !== id));
-      console.log(`rendering hand`)
+      // setWinner(data.winner);
+      // console.log(`rendering hand`)
+      // setCardOnTop(data.topCard);
+      // console.log(`rendering hand`)
+      // setCurrTurn(data.currPlayer);
+      // console.log(`rendering hand`)
+      // setHand(data.playerData.find((p) => p.id === id).hand);
+      // console.log(`rendering hand`)
+      // setOpponents(data.playerData.filter((p) => p.id !== id));
+      // console.log(`rendering hand`)
+
+      setProps({
+        ...props,
+        hand: data.playerData.find((p) => p.id === id).hand,
+        cardOnTop: data.topCard,
+        opponents:  data.playerData.filter((p) => p.id !== id),
+        currTurn: data.currPlayer,
+        winner: data.winner
+      })
     });
   }
 
   socketService.socket.on("giveID", (data) => {
-    // console.log(`receiving id ${data.id} from server`);
-    setId(data.id);
-    // console.log(id)
+    setProps({...props, id: data.id});
   });
 
   if (!winner) {

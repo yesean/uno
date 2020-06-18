@@ -14,7 +14,8 @@ const currentGame = new Game();
 io.on("connection", (socket) => {
   const fetch = () => {
     //temp print
-    console.log(currentGame.getUpdate())
+    // console.log(currentGame.getUpdate())
+    console.log('FETCH on JAH')
     io.emit("fetch", currentGame.getUpdate());
   };
   socket.on("giveName", (m) => {
