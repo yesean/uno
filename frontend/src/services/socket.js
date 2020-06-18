@@ -18,6 +18,9 @@ const draw = (data) => {
 const sendName = (data) => {
   console.log(`sending name ${data.name} to server`);
   socket.emit('giveName', data);
+  socket.on("giveID", (data) => {
+    return data.id
+  });
 };
 
 const uno = (data) => {

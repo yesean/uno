@@ -1,11 +1,11 @@
 class Deck {
   constructor() {
     const deck = [];
-    for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 10; j++) {
-        deck.push({ color: i, value: j });
-        deck.push({ color: i, value: j });
-      }
+    for (let j = 0; j < 10; j++) {
+        deck.push({ color: 'red', value: j });
+        deck.push({ color: 'blue', value: j });
+        deck.push({ color: 'yellow', value: j });
+        deck.push({ color: 'green', value: j });
     }
     this.shuffle(deck);
     this.discard = [deck.pop()];

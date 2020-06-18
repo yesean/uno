@@ -31,6 +31,16 @@ const Game = () => {
       console.log(`receiving data as player id ${id}`);
       console.log(`player data: ${data.playerData.join()}`);
       console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
+      // setWinner(data.winner);
+      // console.log(`rendering hand`)
+      // setCardOnTop(data.topCard);
+      // console.log(`rendering hand`)
+      // setCurrTurn(data.currPlayer);
+      // console.log(`rendering hand`)
+      // setHand(data.playerData.find((p) => p.id === id).hand);
+      // console.log(`rendering hand`)
+      // setOpponents(data.playerData.filter((p) => p.id !== id));
+      // console.log(`rendering hand`)
 
       setProps({
         ...props,
