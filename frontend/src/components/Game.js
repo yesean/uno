@@ -2,9 +2,8 @@ import React, { useState, cloneElement } from 'react';
 import Player from './Player';
 import Deck from './Deck';
 import Opponent from './Opponent';
-import './../App.css'
-import socketService from '../services/socket'
-
+import './../App.css';
+import socketService from './../services/socket.js';
 
 const createCard = (color, value) => {
   return {
@@ -63,12 +62,11 @@ const Game = ({ numPlayers }) => {
   const [deck, setDeck] = useState(currDeck);
 
   const draw = () => {
-    setCards(cards.concat(deck.pop()));
-    setDeck(deck);
+    socketService.draw({id})
   };
 
   const playCard = (card) => {
-    setCardOnTop(card);
+    socketService.play({id, card})
   };
 
   if (!winner) {
@@ -90,9 +88,7 @@ const Game = ({ numPlayers }) => {
           </table>
           <Deck cards={deck.length} />
           <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
-          <button onClick={() => draw()}>
-              Draw
-          </button>
+          <button onClick={() => draw()}>Draw</button>
           <Player
             player={{ cards: cards, id: id }}
             cardOnTop={cardOnTop}
