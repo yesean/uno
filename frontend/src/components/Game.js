@@ -26,12 +26,25 @@ const Game = () => {
     socketService.play({ id: id, card: card });
   };
 
+  useEffect(() => {
+    socketService.socket.on('giveID', (data) => {
+      let temp = data.id
+      socketService.socket.on("fetch", (data) => {
+        setProps({
+          id: temp,
+          hand: data.playerData.find((p) => p.id === temp).hand,
+          cardOnTop: data.topCard,
+          opponents: data.playerData.filter((p) => p.id !== temp),
+          currTurn: data.currPlayer,
+          winner: data.winner,
+        });
+      });
+    });
+  }, [])
+
+  useEffect(() => {
   if (id) {
     socketService.socket.on("fetch", (data) => {
-      // console.log(`receiving data as player id ${id}`);
-      // console.log(`player data: ${data.playerData.join()}`);
-      // console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
-      console.log("fetch run");
       setProps({
         ...props,
         hand: data.playerData.find((p) => p.id === id).hand,
@@ -42,19 +55,7 @@ const Game = () => {
       });
     });
   }
-
-      // setProps({
-      //   ...props,
-      //   hand: data.playerData.find((p) => p.id === id).hand,
-      //   cardOnTop: data.topCard,
-      //   opponents: data.playerData.filter((p) => p.id !== id),
-      //   currTurn: data.currPlayer,
-      //   winner: data.winner,
-      // });
-
-  socketService.socket.on('giveID', (data) => {
-    setProps({ ...props, id: data.id });
-  });
+}, [])
 
   const cardOnTopStyle = {
     fontSize: 'xx-large',
