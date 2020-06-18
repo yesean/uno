@@ -36,19 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.opponent {
-  border-style: solid;
-  height: 100px;
-  width: 80px;
-  color: red;
-}
-
-.playerCard {
-  border-style: solid;
-  height: 100px;
-  width: 80px;
-  font-size: xx-large;
-  text-align: center;
-}
-

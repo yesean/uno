@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import socketService from "../services/socket.js";
 
-const Home = ({ setName }) => {
+const Home = ({ setName, setID }) => {
   const [box, setBox] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    setName(box);
+    socketService.sendName({ box });
+    socketService.socket.on("giveID", (data) => {
+      setID(data.id);
+      setName(box)
+    });
   };
 
   const handleNameChange = (e) => {
@@ -22,12 +27,12 @@ const Home = ({ setName }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <center>
-            <input value={box} onChange={handleNameChange} font-size='30'/>
+            <input value={box} onChange={handleNameChange} font-size="30" />
           </center>
         </div>
         <div>
-        <center>
-          <button type="submit">JOIN</button>
+          <center>
+            <button type="submit">JOIN</button>
           </center>
         </div>
       </form>

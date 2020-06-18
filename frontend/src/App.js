@@ -4,20 +4,11 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home.js";
 import Game from "./components/Game";
-import socketService from "./services/socket.js";
 
 function App() {
   const [name, setName] = useState(null);
   const [id, setID] = useState(null);
 
-  useEffect(() => {
-    if (name) {
-      socketService.sendName({ name });
-      socketService.socket.on("giveID", (data) => {
-        setID(data.id)
-      });
-    }
-  });
   
   if (name && id) {
     return (
@@ -31,7 +22,7 @@ function App() {
     return (
       <div>
       <Header />
-      <Home setName={setName}/>
+      <Home setName={setName} setID={setID}/>
       <Footer />
     </div> 
     )

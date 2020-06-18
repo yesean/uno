@@ -23,7 +23,9 @@ const Player = (props) => {
 
   return (
     <div>
-      <p>{myTurn ? 'Your Turn' : `Player ${currTurn}'s turn`}</p>
+      <p>
+        {myTurn ? 'Your Turn' : `Player ${currTurn}'s turn`}
+      </p>
       <Hand cards={player.hand} validateCard={validateCard} />
     </div>
   );

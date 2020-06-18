@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./../App.css";
-import socketService from "./../services/socket.js";
-import Deck from "./Deck";
-import Opponent from "./Opponent";
-import Player from "./Player";
+import React, { useState, useEffect } from 'react';
+import './../App.css';
+import socketService from './../services/socket.js';
+import Deck from './Deck';
+import Opponent from './Opponent';
+import Player from './Player';
 
 const Game = ({ name, id }) => {
   const [props, setProps] = useState({
@@ -57,12 +57,10 @@ const Game = ({ name, id }) => {
         <center>
           <h1>Playing as {name}</h1>
           <table>
-            <tbody>
-              <tr>
+            <tbody style={{ marginTop: 10, marginBottom: 10 }}>
+              <tr >
                 {opponents.map((o) => (
-                  <td key={o.id} className="opponent">
-                    <Opponent opponent={o} />
-                  </td>
+                  <Opponent opponent={o} />
                 ))}
               </tr>
             </tbody>
