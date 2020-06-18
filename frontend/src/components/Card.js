@@ -9,7 +9,7 @@ const Card = ({ card, validateCard }) => {
     <td
       style={cardStyle}
       className={'playerCard'}
-      onClick={validateCard}>
+      onClick={() => validateCard(card)}>
       {card.value}
     </td>
   );
