@@ -2,9 +2,11 @@ import Game from './../components/Game';
 import io from 'socket.io-client';
 const socket = io('http://localhost:3000');
 
-const play = ({ id, card }) => {
-  console.log(`sending ${card.color}${card.value} as player id ${id}`);
-  socket.emit('play', { id, card });
+const play = (data) => {
+  console.log(
+    `sending ${data.card.color}${data.card.value} as player id ${data.id}`
+  );
+  socket.emit('play', data);
 };
 
 const draw = (data) => {
