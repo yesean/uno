@@ -6,20 +6,13 @@ import Opponent from "./Opponent";
 import Player from "./Player";
 
 const Game = () => {
-  // const [id, setId] = useState(null);
-  // const [hand, setHand] = useState([]);
-  // const [cardOnTop, setCardOnTop] = useState([]);
-  // const [opponents, setOpponents] = useState([]);
-  // const [currTurn, setCurrTurn] = useState(null);
-  // const [winner, setWinner] = useState(null);
-
   const [props, setProps] = useState({
     id: null,
     hand: [],
     cardOnTop: [],
     opponents: [],
     currTurn: [],
-    winner: null,
+    winner: [],
   });
 
   const { id, hand, cardOnTop, opponents, currTurn, winner } = props;
@@ -50,26 +43,31 @@ const Game = () => {
   //   });
   // }
 
-  useEffect(() => {
-    socketService.socket.on("giveID", (data) => {
-      setProps({ ...props, id: data.id });
+      setProps({
+        ...props,
+        hand: data.playerData.find((p) => p.id === id).hand,
+        cardOnTop: data.topCard,
+        opponents: data.playerData.filter((p) => p.id !== id),
+        currTurn: data.currPlayer,
+        winner: data.winner,
+      });
     });
   }, []);
 
-  useEffect(() => {
-      socketService.socket.on("fetch", (data) => {
-        console.log("fetch run");
-        setProps({
-          ...props,
-          hand: data.playerData.find((p) => p.id === id).hand,
-          cardOnTop: data.topCard,
-          opponents: data.playerData.filter((p) => p.id !== id),
-          currTurn: data.currPlayer,
-          winner: data.winner,
-        });
-      });
-    }
-  }, []);
+  socketService.socket.on('giveID', (data) => {
+    setProps({ ...props, id: data.id });
+  });
+
+  const cardOnTopStyle = {
+    fontSize: 'xx-large',
+    color: cardOnTop.color,
+    height: 100,
+    width: 80,
+    border: 'solid',
+    borderRadius: 1,
+    margin: 3,
+    alignItems: 'center',
+  };
 
   if (!winner) {
     return (
@@ -81,7 +79,7 @@ const Game = () => {
             <tbody>
               <tr>
                 {opponents.map((o) => (
-                  <td key={o.id} className="opponent">
+                  <td key={o.id} className='opponent'>
                     <Opponent opponent={o} />
                   </td>
                 ))}
@@ -89,7 +87,7 @@ const Game = () => {
             </tbody>
           </table>
           <Deck />
-          <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
+          <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
           <button onClick={() => draw()}>Draw</button>
           <Player
             player={{ hand: hand, id: id }}
