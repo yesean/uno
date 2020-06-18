@@ -32,9 +32,8 @@ socket.on('fetch', (data) => {
 });
 
 socket.on('giveID', (data) => {
-  console.log(`sending id ${data.id} to server`);
+  console.log(`receiving id ${data.id} to server`);
   Game.setId(data.id);
-  Game.setCards(data.hand);
 });
 
 export default { play, draw, uno, sendName };
