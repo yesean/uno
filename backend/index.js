@@ -14,19 +14,21 @@ const currentGame = new Game();
 
 io.on("connection", (socket) => {
   console.log("a user connected");
-//   Game.addPlayer('test player');
-//   socket.on('name input', m => {
-//   })
+  //   Game.addPlayer('test player');
+  //   socket.on('name input', m => {
+  //   })
   socket.on("draw", (m) => {
-    
     //call back returning the drawn card
-    io.emit('draw', m);
+    io.emit("drawReturn", currentGame.draw(m.id));
   });
+  socket.on("play", (m) => {
+    currentGame.play(m.id, m.card)
+    io.emit("playReturn", currentGame.draw(m.id));
+  });
+  socket.on("deal", (m) => {
 
-  socket.on("play", m => {
-
-  })
-  socket.on("disconnect", () => {
+  });
+  socket.on("disconnect", m => {
     console.log("user disconnected");
     // Game.removePlayer();
   });
