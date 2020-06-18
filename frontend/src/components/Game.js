@@ -21,6 +21,21 @@ const Game = ({ numPlayers }) => {
     socketService.play({ id: id, card: card });
   };
 
+  socketService.socket.on('fetch', (data) => {
+    console.log(`receiving data as player id ${Game.id}`);
+    console.log(``);
+    setWinner(data.winner);
+    setCardOnTop(data.topCard);
+    setCurrTurn(data.currPlayer);
+    setHand(data.playerData.find((p) => p.id === Game.id).hand);
+    setOpponents(data.playerData.filter((p) => p.id !== Game.id));
+  });
+
+  socketService.socket.on('giveID', (data) => {
+    console.log(`receiving id ${data.id} from server`);
+    setId(data.id);
+  });
+
   if (!winner) {
     return (
       //players in circle

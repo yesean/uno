@@ -22,18 +22,4 @@ const uno = ({ id }) => {
   socket.emit('uno', { id });
 };
 
-socket.on('fetch', (data) => {
-  console.log(`receiving data as player id ${Game.id}`);
-  Game.setWinner(data.winner);
-  Game.setCardOnTop(data.topCard);
-  Game.setCurrTurn(data.currPlayer);
-  Game.setCards(data.playerData.find((p) => p.id === Game.id).hand);
-  Game.setOpponents(data.playerData.filter((p) => p.id !== Game.id));
-});
-
-socket.on('giveID', (data) => {
-  console.log(`receiving id ${data.id} to server`);
-  Game.setId(data.id);
-});
-
-export default { play, draw, uno, sendName };
+export default { play, draw, uno, sendName, socket };
