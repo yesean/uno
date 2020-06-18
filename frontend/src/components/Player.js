@@ -8,10 +8,16 @@ const Player = (props) => {
   const myTurn = player.id === currTurn;
 
   const validateCard = (card) => {
-    if (card.color === cardOnTop.color || card.value === cardOnTop.value) {
-      props.playCard(card);
+    if (myTurn) {
+      if (card.color === cardOnTop.color || card.value === cardOnTop.value) {
+        props.playCard(card);
+      } else {
+        alert(`Play a valid card.`);
+      }
     } else {
-      alert(`Play a valid card.`);
+      if (card.color === cardOnTop.color && card.value === cardOnTop.value) {
+        props.playCard(card);
+      }
     }
   };
 
