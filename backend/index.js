@@ -9,11 +9,11 @@ app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 
-let players = [{ name: "benis" }, { name: "bean" }];
 const currentGame = new Game();
 
 io.on("connection", (socket) => {
   const fetch = () => {
+    //temp print
     console.log(currentGame.getUpdate())
     io.emit("fetch", currentGame.getUpdate());
   };
@@ -25,15 +25,12 @@ io.on("connection", (socket) => {
     )
     fetch();
   });
-  
   console.log("a user connected");
-  //   Game.addPlayer('test player');
-  //   socket.on('name input', m => {
-  //   })
   socket.on("draw", (m) => {
     console.log("draw requested")
     //call back returning the drawn card
     m.id = Number(m.id);
+    currentGame.draw(m.id)
     fetch();
   });
   socket.on("play", (m) => {

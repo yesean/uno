@@ -42,9 +42,10 @@ const Game = () => {
     });
   }
 
-  socketService.socket.on('giveID', (data) => {
-    console.log(`receiving id ${data.id} from server`);
+  socketService.socket.on("giveID", (data) => {
+    // console.log(`receiving id ${data.id} from server`);
     setId(data.id);
+    // console.log(id)
   });
 
   if (!winner) {
@@ -57,7 +58,7 @@ const Game = () => {
             <tbody>
               <tr>
                 {opponents.map((o) => (
-                  <td key={o.id} className='opponent'>
+                  <td key={o.id} className="opponent">
                     <Opponent opponent={o} />
                   </td>
                 ))}
