@@ -22,13 +22,12 @@ const Game = ({ numPlayers }) => {
   };
 
   socketService.socket.on('fetch', (data) => {
-    console.log(`receiving data as player id ${Game.id}`);
-    console.log(``);
+    console.log(`receiving data as player id ${id}`);
     setWinner(data.winner);
     setCardOnTop(data.topCard);
     setCurrTurn(data.currPlayer);
-    setHand(data.playerData.find((p) => p.id === Game.id).hand);
-    setOpponents(data.playerData.filter((p) => p.id !== Game.id));
+    setHand(data.playerData.find((p) => p.id === id).hand);
+    setOpponents(data.playerData.filter((p) => p.id !== id));
   });
 
   socketService.socket.on('giveID', (data) => {
