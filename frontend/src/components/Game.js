@@ -14,7 +14,7 @@ const Game = ({ numPlayers }) => {
   const [winner, setWinner] = useState(null);
 
   const draw = () => {
-    socketService.draw({ id });
+    socketService.draw({ id: id });
   };
 
   const playCard = (card) => {

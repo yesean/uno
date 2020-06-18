@@ -7,14 +7,14 @@ const play = ({ id, card }) => {
   socket.emit('play', { id, card });
 };
 
-const draw = ({ id }) => {
-  console.log(`drawing a card as id ${id}`);
-  socket.emit('draw', { id });
+const draw = (data) => {
+  console.log(`drawing a card as id ${data.id}`);
+  socket.emit('draw', data);
 };
 
-const sendName = ({ name }) => {
-  console.log(`sending name ${name} to server`);
-  socket.emit('giveName', { name });
+const sendName = (data) => {
+  console.log(`sending name ${data.name} to server`);
+  socket.emit('giveName', data);
 };
 
 const uno = ({ id }) => {
