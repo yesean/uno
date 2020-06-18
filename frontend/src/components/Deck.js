@@ -1,10 +1,8 @@
 import React from 'react';
-import './../App'
+import './../App';
 
-const Deck = (props) => {
-  let cards = props.cards;
-
-  return <div id='deck'>Cards in Deck: {cards}</div>;
+const Deck = () => {
+  return <div id='deck'>Deck</div>;
 };
 
 export default Deck;

@@ -5,71 +5,25 @@ import Opponent from './Opponent';
 import './../App.css';
 import socketService from './../services/socket.js';
 
-const createCard = (color, value) => {
-  return {
-    color: color,
-    value: value,
-  };
-};
-
-const currDeck = [
-  createCard('b', 1),
-  createCard('b', 2),
-  createCard('b', 3),
-  createCard('b', 4),
-  createCard('b', 5),
-  createCard('b', 6),
-  createCard('b', 7),
-];
-
-const opponents = [
-  {
-    id: 'op1',
-    cards: 4,
-  },
-  {
-    id: 'op2',
-    cards: 10,
-  },
-  {
-    id: 'op3',
-    cards: 2,
-  },
-];
-
-const pcards = [
-  createCard('g', 1),
-  createCard('g', 2),
-  createCard('g', 3),
-  createCard('g', 4),
-  createCard('g', 5),
-];
-
-const pid = '1';
-
-const currPlayer = {
-  id: '1',
-  cards: pcards,
-};
-
-const currTurn = 1;
-
 const Game = ({ numPlayers }) => {
-  const [cards, setCards] = useState(pcards);
-  const [id, setId] = useState(pid);
+  const [id, setId] = useState(null);
+  const [hand, setHand] = useState([]);
+  const [cardOnTop, setCardOnTop] = useState([]);
+  const [opponents, setOpponents] = useState([]);
+  const [currTurn, setCurrTurn] = useState(null);
   const [winner, setWinner] = useState(null);
-  const [cardOnTop, setCardOnTop] = useState(createCard('y', 1));
-  const [deck, setDeck] = useState(currDeck);
 
   const draw = () => {
-    socketService.draw({id})
+    socketService.draw({ id });
   };
 
   const playCard = (card) => {
-    socketService.play({id, card})
+    socketService.play({ id: id, card: card });
   };
 
+
   if (!winner) {
+    socketService.sendName({name: 'benis'});
     return (
       //players in circle
       //deck in middle/ uno button
@@ -86,11 +40,11 @@ const Game = ({ numPlayers }) => {
               </tr>
             </tbody>
           </table>
-          <Deck cards={deck.length} />
+          <Deck />
           <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
           <button onClick={() => draw()}>Draw</button>
           <Player
-            player={{ cards: cards, id: id }}
+            player={{ hand: hand, id: id }}
             cardOnTop={cardOnTop}
             currTurn={currTurn}
             playCard={playCard}

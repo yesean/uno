@@ -17,7 +17,7 @@ const Player = (props) => {
 
   return (
     <div>
-      <Hand cards={player.cards} validateCard={validateCard} />
+      <Hand cards={player.hand} validateCard={validateCard} />
     </div>
   );
 };
