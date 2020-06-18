@@ -11,7 +11,7 @@ const Player = (props) => {
     if (card.color === cardOnTop.color || card.value === cardOnTop.value) {
       props.playCard(card);
     } else {
-      alert(`Play a valid card.`)
+      alert(`Play a valid card.`);
     }
   };
 

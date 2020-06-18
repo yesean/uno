@@ -21,9 +21,7 @@ const Game = ({ numPlayers }) => {
     socketService.play({ id: id, card: card });
   };
 
-
   if (!winner) {
-    socketService.sendName({name: 'benis'});
     return (
       //players in circle
       //deck in middle/ uno button
