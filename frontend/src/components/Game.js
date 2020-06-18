@@ -26,7 +26,7 @@ const Game = ({ name, id }) => {
   };
 
   useEffect(() => {
-    socketService.socket.on("fetch", (data) => {
+    socketService.socket.on('fetch', (data) => {
       setProps({
         ...props,
         hand: data.playerData.find((p) => p.id === id).hand,
@@ -39,14 +39,24 @@ const Game = ({ name, id }) => {
   }, []);
 
   const cardOnTopStyle = {
-    fontSize: "xx-large",
+    fontSize: 'xx-large',
     color: cardOnTop.color,
     height: 100,
     width: 80,
-    border: "solid",
+    border: 'solid',
+    textAlign: 'center',
+  };
+
+  const drawStyle = {
+    fontSize: 'xx-large',
+    color: 'black',
+    height: 40,
+    width: 100,
+    borderStyle: 'solid',
     borderRadius: 1,
-    margin: 3,
-    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 10,
+    textAlign: 'center',
   };
 
   if (!winner) {
@@ -56,18 +66,35 @@ const Game = ({ name, id }) => {
       <div>
         <center>
           <h1>Playing as {name}</h1>
-          <table>
+          <table style={{ borderSpacing: 20 }}>
             <tbody style={{ marginTop: 10, marginBottom: 10 }}>
-              <tr >
+              <tr>
                 {opponents.map((o) => (
                   <Opponent opponent={o} />
                 ))}
               </tr>
             </tbody>
           </table>
-          <Deck />
-          <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
-          <button onClick={() => draw()}>Draw</button>
+          <table style={{ borderSpacing: 30 }}>
+            <tbody>
+              <tr>
+                <td>
+                  <Deck />
+                </td>
+                <td>
+                  <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {/* <div>
+            <Deck />
+            <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
+          </div> */}
+          <div style={drawStyle} onClick={() => draw()}>
+            Draw
+          </div>
+          {/* <button onClick={() => draw()}>Draw</button> */}
           <Player
             player={{ hand: hand, id: id }}
             cardOnTop={cardOnTop}
