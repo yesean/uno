@@ -14,7 +14,7 @@ const Hand = ({ cards, validateCard }) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr className='hand'>
           {cards.map((c) => (
             <Card key={cards.indexOf(c)} card={c} validateCard={validateCard} />
           ))}
