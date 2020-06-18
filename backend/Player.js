@@ -5,8 +5,13 @@ class Player {
     this.hand = [];
   }
   play(card) {
-    const index = this.hand.indexOf(card);
-    return this.hand.splice(index, 1)[0];
+    let target = -1
+    for (let i = 0; i < this.hand.length; i++) {
+      if (this.hand[i].color === card.color && this.hand[i].value === card.value) {
+        target = i
+      }
+    }
+    this.hand.splice(target, 1)[0];
   }
   take(card) {
     this.hand.push(card);

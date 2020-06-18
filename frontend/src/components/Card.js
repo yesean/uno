@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Card = ({ card, validateCard }) => {
-  console.log(`color: ${card.color}`);
+  // console.log(`color: ${card.color}`);
   return (
     <button onClick={() => validateCard(card)}>
       {card.color}
