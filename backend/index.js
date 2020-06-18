@@ -21,9 +21,11 @@ io.on("connection", (socket) => {
   socket.on("giveName", (m) => {
     console.log("name given!")
     let freshPlayer = currentGame.addPlayer(m.name);
+    socket.name = m.name
     socket.emit("giveID",
        { id: freshPlayer.getID() }
     )
+    socket.id = freshPlayer.getID()
     fetch();
   });
   console.log("a user connected");
@@ -41,8 +43,11 @@ io.on("connection", (socket) => {
     fetch();
   });
   socket.on("disconnect", (m) => {
-    console.log("user disconnected");
-    // Game.removePlayer();
+    console.log(`user ${socket.name} ${socket.id} disconnected`);
+    if (socket.name && socket.id) {
+      currentGame.removePlayer(socket.id)
+    }
+    fetch();
   });
 });
 
