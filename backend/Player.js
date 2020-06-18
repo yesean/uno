@@ -24,6 +24,9 @@ class Player {
       return this.hand
   }
   getUpdate() {
+      console.log("hand of player ", this.id)
+      //temp print
+      this.hand.map(c => console.log(c))
       return {
           name: this.name,
           id: this.id,
