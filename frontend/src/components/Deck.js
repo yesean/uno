@@ -3,16 +3,17 @@ import './../App';
 
 const Deck = () => {
   const deckStyle = {
+    height: 100,
+    width: 80,
     color: 'black',
     borderStyle: 'solid',
     borderRadius: 1,
-    height: 100,
-    width: 80,
-    margin: 'auto',
+    marginTop: '10',
+    marginBottom: '10',
     fontSize: 'xx-large',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 30,
+    textAlign: 'center',
   };
   return (
     <div style={deckStyle} id='deck'>

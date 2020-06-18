@@ -28,8 +28,8 @@ const Game = () => {
 
   useEffect(() => {
     socketService.socket.on('giveID', (data) => {
-      let temp = data.id
-      socketService.socket.on("fetch", (data) => {
+      let temp = data.id;
+      socketService.socket.on('fetch', (data) => {
         setProps({
           id: temp,
           hand: data.playerData.find((p) => p.id === temp).hand,
@@ -40,43 +40,33 @@ const Game = () => {
         });
       });
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
-  if (id) {
-    socketService.socket.on("fetch", (data) => {
-      setProps({
-        ...props,
-        hand: data.playerData.find((p) => p.id === id).hand,
-        cardOnTop: data.topCard,
-        opponents: data.playerData.filter((p) => p.id !== id),
-        currTurn: data.currPlayer,
-        winner: data.winner,
+    if (id) {
+      socketService.socket.on('fetch', (data) => {
+        setProps({
+          ...props,
+          hand: data.playerData.find((p) => p.id === id).hand,
+          cardOnTop: data.topCard,
+          opponents: data.playerData.filter((p) => p.id !== id),
+          currTurn: data.currPlayer,
+          winner: data.winner,
+        });
       });
-    });
-  }
-}, [])
+    }
+  }, []);
 
   const cardOnTopStyle = {
+    height: 100,
+    width: 80,
     fontSize: 'xx-large',
     color: cardOnTop.color,
-    height: 100,
-    width: 80,
     border: 'solid',
     borderRadius: 1,
-    margin: 'auto',
-    alignItems: 'center',
-  };
-
-  const opponentStyle = {
-    fontSize: 'xx-large',
-    color: 'red',
-    height: 100,
-    width: 80,
-    border: 'solid',
-    borderRadius: 1,
-    margin: 'auto',
-    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+    alignText: 'center',
   };
 
   if (!winner) {
@@ -84,26 +74,26 @@ const Game = () => {
       //players in circle
       //deck in middle/ uno button
       <div>
-        <table style={{ margin: 'auto' }}>
-          <tbody>
-            <tr>
-              {opponents.map((o) => (
-                <td key={o.id} style={opponentStyle} className='opponent'>
+        <center>
+          <table>
+            <tbody style={{ marginTop: 10, marginBottom: 10 }}>
+              <tr >
+                {opponents.map((o) => (
                   <Opponent opponent={o} />
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-        <Deck />
-        <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
-        <button onClick={() => draw()}>Draw</button>
-        <Player
-          player={{ hand: hand, id: id }}
-          cardOnTop={cardOnTop}
-          currTurn={currTurn}
-          playCard={playCard}
-        />
+                ))}
+              </tr>
+            </tbody>
+          </table>
+          <Deck />
+          <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
+          <button onClick={() => draw()}>Draw</button>
+          <Player
+            player={{ hand: hand, id: id }}
+            cardOnTop={cardOnTop}
+            currTurn={currTurn}
+            playCard={playCard}
+          />
+        </center>
       </div>
       //player's deck with navigation buttons
     );
