@@ -18,6 +18,7 @@ class Game {
     const temp = new Player(name, maxID);
     this.players.push(temp);
     for (let i = 0; i < 7; i++) {
+        console.log('benis')
       this.draw(temp.getID());
     }
     return temp;
@@ -52,9 +53,8 @@ class Game {
     }
   }
   getUpdate() {
-      /* 
-     i 
-      */
+      //temp print
+    console.log('size of deck: ',this.deck.deck.length)
     return {
       currPlayer: this.players[0].getID(),
       topCard: this.deck.peek(),
