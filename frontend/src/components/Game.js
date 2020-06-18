@@ -5,9 +5,8 @@ import Deck from "./Deck";
 import Opponent from "./Opponent";
 import Player from "./Player";
 
-const Game = () => {
+const Game = ({ name, id }) => {
   const [props, setProps] = useState({
-    id: null,
     hand: [],
     cardOnTop: [],
     opponents: [],
@@ -15,7 +14,7 @@ const Game = () => {
     winner: [],
   });
 
-  const { id, hand, cardOnTop, opponents, currTurn, winner } = props;
+  const { hand, cardOnTop, opponents, currTurn, winner } = props;
 
   const draw = () => {
     console.log(`calling draw`);
@@ -27,23 +26,6 @@ const Game = () => {
   };
 
   useEffect(() => {
-    socketService.socket.on('giveID', (data) => {
-      let temp = data.id
-      socketService.socket.on("fetch", (data) => {
-        setProps({
-          id: temp,
-          hand: data.playerData.find((p) => p.id === temp).hand,
-          cardOnTop: data.topCard,
-          opponents: data.playerData.filter((p) => p.id !== temp),
-          currTurn: data.currPlayer,
-          winner: data.winner,
-        });
-      });
-    });
-  }, [])
-
-  useEffect(() => {
-  if (id) {
     socketService.socket.on("fetch", (data) => {
       setProps({
         ...props,
@@ -54,18 +36,17 @@ const Game = () => {
         winner: data.winner,
       });
     });
-  }
-}, [])
+  }, []);
 
   const cardOnTopStyle = {
-    fontSize: 'xx-large',
+    fontSize: "xx-large",
     color: cardOnTop.color,
     height: 100,
     width: 80,
-    border: 'solid',
+    border: "solid",
     borderRadius: 1,
     margin: 3,
-    alignItems: 'center',
+    alignItems: "center",
   };
 
   if (!winner) {
@@ -74,11 +55,12 @@ const Game = () => {
       //deck in middle/ uno button
       <div>
         <center>
+          <h1>Playing as {name}</h1>
           <table>
             <tbody>
               <tr>
                 {opponents.map((o) => (
-                  <td key={o.id} className='opponent'>
+                  <td key={o.id} className="opponent">
                     <Opponent opponent={o} />
                   </td>
                 ))}
