@@ -1,32 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.0f6f12cd.chunk.css",
-<<<<<<< HEAD
-    "main.js": "/static/js/main.6f92bc18.chunk.js",
-    "main.js.map": "/static/js/main.6f92bc18.chunk.js.map",
-=======
-<<<<<<< HEAD
-    "main.js": "/static/js/main.2e2071e3.chunk.js",
-    "main.js.map": "/static/js/main.2e2071e3.chunk.js.map",
-=======
-    "main.js": "/static/js/main.47c29c2a.chunk.js",
-    "main.js.map": "/static/js/main.47c29c2a.chunk.js.map",
->>>>>>> db3933fd1155f331a3d39bccf3b8d8ebaafcab35
->>>>>>> ce9e7b6ca7d543d578d99b5222cb2b9313567c36
+    "main.js": "/static/js/main.fdeb60d0.chunk.js",
+    "main.js.map": "/static/js/main.fdeb60d0.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c8a21426.js",
     "runtime-main.js.map": "/static/js/runtime-main.c8a21426.js.map",
     "static/js/2.268e7049.chunk.js": "/static/js/2.268e7049.chunk.js",
     "static/js/2.268e7049.chunk.js.map": "/static/js/2.268e7049.chunk.js.map",
     "index.html": "/index.html",
-<<<<<<< HEAD
-    "precache-manifest.9f7c66dd4905fa050f99cdaf06c63569.js": "/precache-manifest.9f7c66dd4905fa050f99cdaf06c63569.js",
-=======
-<<<<<<< HEAD
-    "precache-manifest.55166c5d7023a9a1b0ffe664b0b039fe.js": "/precache-manifest.55166c5d7023a9a1b0ffe664b0b039fe.js",
-=======
-    "precache-manifest.931c7184f8e4e6a05a22f2223b442825.js": "/precache-manifest.931c7184f8e4e6a05a22f2223b442825.js",
->>>>>>> db3933fd1155f331a3d39bccf3b8d8ebaafcab35
->>>>>>> ce9e7b6ca7d543d578d99b5222cb2b9313567c36
+    "precache-manifest.ca7654ed2a450d7c842afacb2720e331.js": "/precache-manifest.ca7654ed2a450d7c842afacb2720e331.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.0f6f12cd.chunk.css.map": "/static/css/main.0f6f12cd.chunk.css.map",
     "static/js/2.268e7049.chunk.js.LICENSE.txt": "/static/js/2.268e7049.chunk.js.LICENSE.txt"
@@ -35,14 +17,6 @@
     "static/js/runtime-main.c8a21426.js",
     "static/js/2.268e7049.chunk.js",
     "static/css/main.0f6f12cd.chunk.css",
-<<<<<<< HEAD
-    "static/js/main.6f92bc18.chunk.js"
-=======
-<<<<<<< HEAD
-    "static/js/main.2e2071e3.chunk.js"
-=======
-    "static/js/main.47c29c2a.chunk.js"
->>>>>>> db3933fd1155f331a3d39bccf3b8d8ebaafcab35
->>>>>>> ce9e7b6ca7d543d578d99b5222cb2b9313567c36
+    "static/js/main.fdeb60d0.chunk.js"
   ]
 }
