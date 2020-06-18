@@ -5,7 +5,7 @@ const Home = ({ setName, setID }) => {
   const [box, setBox] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    socketService.sendName({ box });
+    socketService.sendName({ name: box });
     socketService.socket.on("giveID", (data) => {
       setID(data.id);
       setName(box)

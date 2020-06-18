@@ -48,8 +48,7 @@ class Game {
   checkWinner() {
     const tempWin = this.players.find((p) => p.getWin());
     if (tempWin) {
-      this.winner = tempWin;
-      return tempWin;
+      this.winner = tempWin.getName();
     }
   }
   getUpdate() {
