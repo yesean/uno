@@ -23,6 +23,8 @@ const Game = ({ numPlayers }) => {
 
   socketService.socket.on('fetch', (data) => {
     console.log(`receiving data as player id ${id}`);
+    console.log('hand: ' + data.playerData.find((p) => p.id === id).hand)
+    console.log(`player data: ${data.playerData}`)
     setWinner(data.winner);
     setCardOnTop(data.topCard);
     setCurrTurn(data.currPlayer);
