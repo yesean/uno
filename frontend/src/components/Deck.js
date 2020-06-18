@@ -8,7 +8,7 @@ const Deck = () => {
     borderRadius: 1,
     height: 100,
     width: 80,
-    margin: 'auto',
+    margin: 3,
     justifyContent: 'center',
     alignItems: 'center',
   };

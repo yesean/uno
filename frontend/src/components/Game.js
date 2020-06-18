@@ -6,16 +6,16 @@ import Opponent from './Opponent';
 import Player from './Player';
 
 const Game = () => {
-  const[props, setProps] = useState({
+  const [props, setProps] = useState({
     id: null,
-    hand: [], 
-    cardOnTop: [], 
+    hand: [],
+    cardOnTop: [],
     opponents: [],
     currTurn: [],
     winner: [],
-  })
-  
-  const {id, hand, cardOnTop, opponents, currTurn, winner} = props
+  });
+
+  const { id, hand, cardOnTop, opponents, currTurn, winner } = props;
 
   const draw = () => {
     console.log(`calling draw`);
@@ -36,16 +36,27 @@ const Game = () => {
         ...props,
         hand: data.playerData.find((p) => p.id === id).hand,
         cardOnTop: data.topCard,
-        opponents:  data.playerData.filter((p) => p.id !== id),
+        opponents: data.playerData.filter((p) => p.id !== id),
         currTurn: data.currPlayer,
-        winner: data.winner
-      })
+        winner: data.winner,
+      });
     });
   }
 
-  socketService.socket.on("giveID", (data) => {
-    setProps({...props, id: data.id});
+  socketService.socket.on('giveID', (data) => {
+    setProps({ ...props, id: data.id });
   });
+
+  const cardOnTopStyle = {
+    fontSize: 'xx-large',
+    color: cardOnTop.color,
+    height: 100,
+    width: 80,
+    border: 'solid',
+    borderRadius: 1,
+    margin: 3,
+    alignItems: 'center',
+  };
 
   if (!winner) {
     return (
@@ -57,7 +68,7 @@ const Game = () => {
             <tbody>
               <tr>
                 {opponents.map((o) => (
-                  <td key={o.id} className="opponent">
+                  <td key={o.id} className='opponent'>
                     <Opponent opponent={o} />
                   </td>
                 ))}
@@ -65,7 +76,7 @@ const Game = () => {
             </tbody>
           </table>
           <Deck />
-          <p>Top Card: {`${cardOnTop.color}${cardOnTop.value}`}</p>
+          <div style={cardOnTopStyle}>{`${cardOnTop.value}`}</div>
           <button onClick={() => draw()}>Draw</button>
           <Player
             player={{ hand: hand, id: id }}

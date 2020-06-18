@@ -6,7 +6,10 @@ const Card = ({ card, validateCard }) => {
     color: card.color,
   };
   return (
-    <td style={cardStyle} className={'playerCard'}>
+    <td
+      style={cardStyle}
+      className={'playerCard'}
+      onClick={validateCard}>
       {card.value}
     </td>
   );
