@@ -1,19 +1,22 @@
-import React, { useState, cloneElement } from 'react';
-import Player from './Player';
-import Deck from './Deck';
-import Opponent from './Opponent';
+import React, { useState } from 'react';
 import './../App.css';
 import socketService from './../services/socket.js';
+import Deck from './Deck';
+import Opponent from './Opponent';
+import Player from './Player';
 
-const Game = ({ numPlayers }) => {
+const Game = () => {
   const [id, setId] = useState(null);
   const [hand, setHand] = useState([]);
   const [cardOnTop, setCardOnTop] = useState([]);
   const [opponents, setOpponents] = useState([]);
   const [currTurn, setCurrTurn] = useState(null);
   const [winner, setWinner] = useState(null);
+  // setId(5)
+  // console.log(id)
 
   const draw = () => {
+    console.log(`calling draw`);
     socketService.draw({ id: id });
   };
 
@@ -21,16 +24,23 @@ const Game = ({ numPlayers }) => {
     socketService.play({ id: id, card: card });
   };
 
-  socketService.socket.on('fetch', (data) => {
-    console.log(`receiving data as player id ${id}`);
-    console.log(`player data: ${data.playerData.join()}`);
-    console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
-    setWinner(data.winner);
-    setCardOnTop(data.topCard);
-    setCurrTurn(data.currPlayer);
-    setHand(data.playerData.find((p) => p.id === id).hand);
-    setOpponents(data.playerData.filter((p) => p.id !== id));
-  });
+  if (id) {
+    socketService.socket.on('fetch', (data) => {
+      console.log(`receiving data as player id ${id}`);
+      console.log(`player data: ${data.playerData.join()}`);
+      console.log('hand: ' + data.playerData.find((p) => p.id === id).hand);
+      setWinner(data.winner);
+      console.log(`rendering hand`)
+      setCardOnTop(data.topCard);
+      console.log(`rendering hand`)
+      setCurrTurn(data.currPlayer);
+      console.log(`rendering hand`)
+      setHand(data.playerData.find((p) => p.id === id).hand);
+      console.log(`rendering hand`)
+      setOpponents(data.playerData.filter((p) => p.id !== id));
+      console.log(`rendering hand`)
+    });
+  }
 
   socketService.socket.on('giveID', (data) => {
     console.log(`receiving id ${data.id} from server`);

@@ -19,9 +19,9 @@ const sendName = (data) => {
   socket.emit('giveName', data);
 };
 
-const uno = ({ id }) => {
-  console.log(`sending uno signal to server from id ${Game.id}`);
-  socket.emit('uno', { id });
+const uno = (data) => {
+  console.log(`sending uno signal to server from id ${data.id}`);
+  socket.emit('uno', data);
 };
 
 export default { play, draw, uno, sendName, socket };
