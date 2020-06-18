@@ -8,17 +8,25 @@ class Game {
     this.winner = null;
   }
   playerByID(id) {
-    return this.players.find((p) => p.getID === id);
+    return this.players.find((p) => p.getID() === id);
   }
   addPlayer(name) {
-    let maxID = max(...this.players.map((p) => p.getID)) + 1;
-    this.players.push(new Player(maxID, name));
+    let maxID = 1;
+    if (this.players.length != 0) {
+      maxID = Math.max(...this.players.map((p) => p.getID())) + 1;
+    }
+    const temp = new Player(name, maxID);
+    this.players.push(temp);
+    for (let i = 0; i < 7; i++) {
+      this.draw(temp.getID());
+    }
+    return temp;
   }
   removePlayer(id) {
     const index = this.players.indexOf(this.playerByID(id));
     players.splice(index, 1);
   }
-  play(id = this.players[0].getID, playedCard) {
+  play(id = this.players[0].getID(), playedCard) {
     //assumes the card played is valid, as checked on client side
     this.playerByID(id).play(playedCard);
     this.deck.place(playedCard);
@@ -27,9 +35,11 @@ class Game {
     this.players.push(justPlayed);
     this.checkWinner();
   }
-  draw(id = this.players[0].getID) {
+  draw(id = this.players[0].getID()) {
     const card = this.deck.draw();
     this.playerByID(id).take(card);
+    // console.log(this.deck.getDeck())
+    // console.log(this.players.map(p => p.getHand()));
     return card;
   }
   //Checks if any players have won; if found, sets winner to the
@@ -40,6 +50,17 @@ class Game {
       this.winner = tempWin;
       return tempWin;
     }
+  }
+  getUpdate() {
+      /* 
+     i 
+      */
+    return {
+      currPlayer: this.players[0].getID(),
+      topCard: this.deck.peek(),
+      playerData: this.players.map((p) => p.getUpdate()),
+      winner: this.winner
+    };
   }
 }
 

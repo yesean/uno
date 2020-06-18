@@ -32,7 +32,7 @@ class Deck {
   }
 
   peek() {
-    return this.discard.peekBack();
+    return this.discard[this.discard.length - 1];
   }
 
   check() {

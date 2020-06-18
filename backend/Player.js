@@ -6,7 +6,7 @@ class Player {
   }
   play(card) {
     const index = this.hand.indexOf(card);
-    return card;
+    return this.hand.splice(index, 1)[0];
   }
   take(card) {
     this.hand.push(card);
@@ -19,6 +19,16 @@ class Player {
   }
   getWin() {
       return this.hand.length === 0
+  }
+  getHand() {
+      return this.hand
+  }
+  getUpdate() {
+      return {
+          name: this.name,
+          id: this.id,
+          hand: this.hand
+      }
   }
 }
 

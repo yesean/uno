@@ -12,23 +12,33 @@ app.use(express.json());
 let players = [{ name: "benis" }, { name: "bean" }];
 const currentGame = new Game();
 
+currentGame.addPlayer("benis");
+currentGame.addPlayer("manam");
+currentGame.addPlayer("obunga");
 io.on("connection", (socket) => {
+  const fetch = () => {
+    console.log(currentGame.getUpdate())
+    io.emit("fetch", currentGame.getUpdate());
+  };
+  socket.on("giveName", (m) => {
+    currentGame.addPlayer(m.name);
+    fetch();
+  });
   console.log("a user connected");
   //   Game.addPlayer('test player');
   //   socket.on('name input', m => {
   //   })
   socket.on("draw", (m) => {
     //call back returning the drawn card
-    io.emit("drawReturn", currentGame.draw(m.id));
+    m.id = Number(m.id);
+    fetch();
   });
   socket.on("play", (m) => {
-    currentGame.play(m.id, m.card)
-    io.emit("playReturn", currentGame.draw(m.id));
+    m.id = Number(m.id);
+    currentGame.play(m.id, m.card);
+    fetch();
   });
-  socket.on("deal", (m) => {
-
-  });
-  socket.on("disconnect", m => {
+  socket.on("disconnect", (m) => {
     console.log("user disconnected");
     // Game.removePlayer();
   });
