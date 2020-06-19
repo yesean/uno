@@ -48,7 +48,7 @@
 }
 
 .card {
-  margin: 5px;
+  margin: 15px;
   flex-basis: 80px;
   height: 100px;
   line-height: 100px;
@@ -59,12 +59,18 @@
 
 .header {
   font-size: 40px;
+  height: 50px;
   font-weight: bold;
-  position: absolute;
-  top: 5px;
-  width: 100%;
-  height: 10px;
+  top: 0px;
+  width: 150px;
   margin: auto;
+  margin-top: 10px;
+  background-color: #ee161f;
+  color: #f8db22;
+  text-shadow: 3px 3px #000;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .footer {
@@ -74,6 +80,7 @@
   bottom: 0px;
   width: 100%;
   margin: auto;
+  margin-bottom: 15px;
 }
 
 .window {
@@ -86,7 +93,7 @@
 .home {
   margin: auto;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 40px;
@@ -112,12 +119,30 @@
   vertical-align: middle;
   position: absolute;
   width: 100%;
+  height: 75%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
+.turn {
+  margin: auto;
+  font-size: xx-large;
+  font-weight: bold;
+  margin: 10px 0px;
+  padding: 10px;
+}
+
+.playerName {
+  margin: auto;
+  font-size: xx-large;
+  font-weight: bold;
+  margin: 10px 0px;
+  padding: 10px;
+}
+
 .opponents {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -127,64 +152,60 @@
 }
 
 .opponent {
-  width: 150px;
-  height: 200px;
+  width: 120px;
+  height: 150px;
   border: 1px solid black;
   background-color: pink;
-  font-size: xx-large;
+  font-size: 37px;
 }
 
-.opponentName {
-  line-height: 50px;
-  height: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 5px;
-  padding-right: 5px;
-  font-size: x-large;
-}
-
-.opponentSize {
-  line-height: 100px;
-  height: 100px;
+.opponentName,
+opponentSize {
+  font-size: 30px;
   vertical-align: middle;
+  padding: 10px;
+  line-height: 37px;
+  height: 75px;
+  overflow: hidden;
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
 }
 
-.deckAndTopCard {
+/* .opponentSize {
+  line-height: 25%;
+  height: 50%;
+  vertical-align: middle;
+} */
+
+.drawTopDeck {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.deckAndTopCard div {
-  background-color: black;
-  color: white;
-  flex-basis: 80px;
-  height: 100px;
-  margin: 10px;
-  line-height: 100px;
+.drawTopDeck div {
+  flex-basis: 100px;
+  height: 125px;
+  margin: 30px;
+  line-height: 125px;
   font-size: xx-large;
 }
 
 .deck {
+  color: white;
   border: 1px solid black;
+  background-color: black;
 }
 
 .topCard {
+  color: white;
 }
 
 .draw {
   margin: auto;
   text-align: center;
   vertical-align: middle;
-  border: 3px black solid;
-  width: 80px;
-  height: 100px;
-  line-height: 100px;
-  margin-top: 10px;
-}
-
-table {
-  border-spacing: 4px;
-  height: 100px;
+  color: black;
+  border: 1px black solid;
+  height: 50%;
 }

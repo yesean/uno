@@ -20,8 +20,6 @@ const Home = ({ setName, setID }) => {
     <div className='home'>
       <h3>Welcome to Uno!</h3>
       <h3>Enter Name:</h3>
-      <br></br>
-      <br></br>
       <form onSubmit={handleSubmit}>
         <div>
           <center>

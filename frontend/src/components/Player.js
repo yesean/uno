@@ -5,6 +5,7 @@ const Player = (props) => {
   const player = props.player;
   const cardOnTop = props.cardOnTop;
   const currTurn = props.currTurn;
+  const opponents = props.opponents;
   const myTurn = player.id === currTurn;
 
   const validateCard = (card) => {
@@ -23,9 +24,6 @@ const Player = (props) => {
 
   return (
     <div>
-      <p>
-        {myTurn ? 'Your Turn' : `Player ${currTurn}'s turn`}
-      </p>
       <Hand cards={player.hand} validateCard={validateCard} />
     </div>
   );

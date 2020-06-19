@@ -43,22 +43,31 @@ const Game = ({ name, id }) => {
       //players in circle
       //deck in middle/ uno button
       <div className='game'>
+        <div className='turn'>
+          {id === currTurn
+            ? 'Your Turn'
+            : `${opponents.find((p) => p.id === currTurn).name}'s turn`}
+        </div>
         <Opponents opponents={opponents} />
-        <div className='deckAndTopCard'>
-          <Deck />
+        <div className='drawTopDeck'>
+          <div className='draw' onClick={() => draw()}>
+            Draw
+          </div>
           <div
             style={{ backgroundColor: `${cardOnTop.color}` }}
-            className='topCard'>{`${cardOnTop.value}`}</div>
-        </div>
-        <div className='draw' onClick={() => draw()}>
-          Draw
+            className='topCard'>
+            {`${cardOnTop.value}`}
+          </div>
+          <Deck />
         </div>
         <Player
           player={{ hand: hand, id: id }}
           cardOnTop={cardOnTop}
           currTurn={currTurn}
+          opponents={opponents}
           playCard={playCard}
         />
+        <div className='playerName'>{`Playing as ${name}`}</div>
       </div>
       //player's deck with navigation buttons
     );
