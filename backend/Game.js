@@ -18,14 +18,27 @@ class Game {
     const temp = new Player(name, maxID);
     this.players.push(temp);
     for (let i = 0; i < 7; i++) {
-        console.log('benis')
       this.draw(temp.getID());
     }
     return temp;
   }
+  handleReverse() {
+
+  }
+  handleCancel() {
+
+  }
+  handDraw() {
+
+  }
+  handleWild() {
+
+  }
+  
   removePlayer(id) {
     const index = this.players.indexOf(this.playerByID(id));
-    players.splice(index, 1);
+    const rem = this.players.splice(index, 1)[0];
+    rem.getHand().map(c => this.deck.burn(c))
   }
   play(id = this.players[0].getID(), playedCard) {
     //assumes the card played is valid, as checked on client side
