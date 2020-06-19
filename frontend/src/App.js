@@ -9,23 +9,30 @@ function App() {
   const [name, setName] = useState(null);
   const [id, setID] = useState(null);
 
-  if (name && id) {
-    return (
-      <div className='window'>
-        <Header />
+  // if (name && id) {
+  //   return (
+  //     <div className='window'>
+  //       <Header />
+  //       <Game name={name} id={id} />
+  //       <Footer />
+  //     </div>
+  //   );
+  // } else {
+  return (
+    <div className='window'>
+      {/* <Header /> */}
+      <header className='header'>UNO.io</header>
+      {name && id ? (
         <Game name={name} id={id} />
-        <Footer />
-      </div>
-    );
-  } else {
-    return (
-      <div className='window'>
-        <Header />
+      ) : (
         <Home setName={setName} setID={setID} />
-        <Footer />
-      </div>
-    );
-  }
+      )}
+      {/* <Home setName={setName} setID={setID} /> */}
+      <footer className='footer'>Bean Bwill</footer>
+      {/* <Footer /> */}
+    </div>
+  );
+  // }
 }
 
 export default App;

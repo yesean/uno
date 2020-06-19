@@ -37,38 +37,140 @@
   }
 }
 
+.hand {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: space-between;
+  flex-wrap: wrap;
+  /* height: 220px; */
+}
+
 .card {
+  margin: 5px;
+  flex-basis: 80px;
+  height: 100px;
+  line-height: 100px;
   font-size: xx-large;
   color: white;
-  width: 80px;
   text-align: center;
 }
 
-.hand {
-  height: 100%;
+.header {
+  font-size: 40px;
+  font-weight: bold;
+  position: absolute;
+  top: 5px;
+  width: 100%;
+  height: 10px;
   margin: auto;
+}
+
+.footer {
+  font-size: 20px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  margin: auto;
+}
+
+.window {
+  position: relative;
+  min-height: 100vh;
+  text-align: center;
+  margin: auto;
+}
+
+.home {
+  margin: auto;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+}
+
+.home input {
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.home button {
+  width: 50%;
+  padding: 10px;
 }
 
 .game {
   margin: auto;
   text-align: center;
   vertical-align: middle;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.window {
-  margin: auto;
-  height: 100%;
-  width: 50%;
-  text-align: center;
-  vertical-align: middle;
-  border: 3px black solid;
+.opponents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  margin: 40px 0px;
+  width: 100%;
 }
 
-.deck-topCard {
-  margin: auto;
-  text-align: center;
+.opponent {
+  width: 150px;
+  height: 200px;
+  border: 1px solid black;
+  background-color: pink;
+  font-size: xx-large;
+}
+
+.opponentName {
+  line-height: 50px;
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: x-large;
+}
+
+.opponentSize {
+  line-height: 100px;
+  height: 100px;
   vertical-align: middle;
-  /* border: 3px black solid; */
+}
+
+.deckAndTopCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.deckAndTopCard div {
+  background-color: black;
+  color: white;
+  flex-basis: 80px;
+  height: 100px;
+  margin: 10px;
+  line-height: 100px;
+  font-size: xx-large;
+}
+
+.deck {
+  border: 1px solid black;
+}
+
+.topCard {
 }
 
 .draw {
@@ -76,27 +178,26 @@
   text-align: center;
   vertical-align: middle;
   border: 3px black solid;
+  width: 80px;
   height: 100px;
   line-height: 100px;
-  width: 10%;
   margin-top: 10px;
 }
 
-.opponent {
+/* .opponent {
+  width: 80px;
+  height: 100px;
   margin: auto;
   text-align: center;
   vertical-align: middle;
-  border: 1px black solid;
   background-color: pink;
-  height: 100%;
-  width: 80px;
 }
 
 .opponents {
   margin: auto;
   height: 100px;
-}
-
+} */
+/* 
 .deck {
   font-size: xx-large;
   color: white;
@@ -104,10 +205,9 @@
   width: 80px;
   text-align: center;
   background-color: black;
-}
+} */
 
 table {
-  border: 1px black solid;
   border-spacing: 4px;
   height: 100px;
 }

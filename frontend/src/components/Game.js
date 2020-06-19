@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './../App.css';
 import socketService from './../services/socket.js';
 import Deck from './Deck';
-import Opponent from './Opponent';
+import Opponents from './Opponents';
 import Player from './Player';
 
 const Game = ({ name, id }) => {
@@ -43,30 +43,13 @@ const Game = ({ name, id }) => {
       //players in circle
       //deck in middle/ uno button
       <div className='game'>
-        <h1>Playing as {name}</h1>
-        <table style={{ borderSpacing: 20 }} className='opponents'>
-          <tbody style={{ marginTop: 10, marginBottom: 10 }}>
-            <tr>
-              {opponents.map((o) => (
-                <Opponent opponent={o} />
-              ))}
-            </tr>
-          </tbody>
-        </table>
-        <table className='deck-topCard'>
-          <tbody>
-            <tr>
-              <td>
-                <Deck />
-              </td>
-              <td
-                style={{ backgroundColor: `${cardOnTop.color}` }}
-                className='card'>
-                {`${cardOnTop.value}`}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <Opponents opponents={opponents} />
+        <div className='deckAndTopCard'>
+          <Deck />
+          <div
+            style={{ backgroundColor: `${cardOnTop.color}` }}
+            className='topCard'>{`${cardOnTop.value}`}</div>
+        </div>
         <div className='draw' onClick={() => draw()}>
           Draw
         </div>
